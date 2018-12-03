@@ -5,7 +5,8 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell: cURL
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='/'>NoMoreBounce</a>
+  - <a href='/accounts/signup/'>Sign Up to create a connector</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -16,10 +17,8 @@ search: true
 
 # Introduction
 
-Welcome to the NoMoreBounce API! You can use our API to access NoMoreBounce API endpoints.
-
-You can view code examples in the dark area to the right,
-and you can switch the programming language of the examples with the tabs in the top right.
+Welcome to the NoMoreBounce API!
+You can use this documentation to make requests to the NoMoreBounce API endpoints.
 
 To use the API you have to create a "Connector". To do this you have to go in
 the "Connectors" menu. Than you can add an "API Connector" pushing the "Connect"
@@ -152,3 +151,73 @@ list_id | The list ID (you can find it also in the Imported page)
 Parameter | Default | Description
 --------- | ------- | -----------
 page | 1 | The page of the pagination. 1000 emails per page.
+
+
+## Add emails to a list
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": 200,
+  "msg": "",
+  "imported": 200
+}
+```
+
+This endpoint is used to add a list of emails to an imported list.
+
+### HTTP Request
+
+`POST https://www.nomorebounce.com/api/v1/importer/add/<CONN_ID>/`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+token | The token that you can find in the connectors page (required)
+list_id | The list ID (required)(you can find it also in the Imported page)
+recipients | It's a JSON object (required) containing a "recipients" field as an emails' list {"recipients":["em1@example.com ", "em2@example.com"]}
+
+<aside class="warning">
+Consider to send not more than 1000 emails per call.
+</aside>
+
+## List Statistics
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": 200,
+  "msg": "",
+  "stats": [
+        {
+            "count": 29,
+            "msg": "Don't use it",
+            "result_type": 2
+        },
+        {
+            "count": 48,
+            "msg": "Mailbox is valid",
+            "result_type": 1
+        },
+    ...],
+    "list_id": 5
+}
+```
+
+This endpoint returns all the statistics about a list. In a "stats" element you can
+find the "result_type" field that can return 1 if it's valid and 2 if it's not
+valid for any reason.
+
+### HTTP Request
+
+`GET https://www.nomorebounce.com/api/v1/importer/stats/<CONN_ID>/`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+token | The token that you can find in the connectors page (required)
+list_id | The list ID (required)(you can find it also in the Imported page)
