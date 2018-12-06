@@ -35,6 +35,9 @@ After pushed the "Save" button you will see a "Connector ID" and a "Token".
 This endpoint ask for a check on an email address and return a result
 as a message.
 If you get a message like "Mailbox is valid" you can use the email address.
+The CONN_ID is the connector ID that you can create in the "Connectors" page and
+than you can create an API Connector. 
+(https://www.nomorebounce.com/connectors/api/)
 
 > The above command returns JSON structured like this:
 
