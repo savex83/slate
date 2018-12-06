@@ -32,7 +32,9 @@ After pushed the "Save" button you will see a "Connector ID" and a "Token".
 
 ## Check a single email address
 
-This endpoint retrieves all kittens.
+This endpoint ask for a check on an email address and return a result
+as a message.
+If you get a message like "Mailbox is valid" you can use the email address.
 
 > The above command returns JSON structured like this:
 
@@ -46,7 +48,7 @@ This endpoint retrieves all kittens.
 
 ### HTTP Request
 
-`GET https://www.nomorebounce.com/api/v1/check/<CONN_ID>/`
+`POST https://www.nomorebounce.com/api/v1/check/<CONN_ID>/`
 
 ### Query Parameters
 
