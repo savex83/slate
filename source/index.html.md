@@ -34,9 +34,9 @@ After pushed the "Save" button you will see a "Connector ID" and a "Token".
 
 This endpoint ask for a check on an email address and return a result
 as a message.
-If you get a message like "Mailbox is valid" you can use the email address.
+If you get an smtp_state like "exist" you can use the email address.
 The CONN_ID is the connector ID that you can create in the "Connectors" page and
-than you can create an API Connector. 
+than you can create an API Connector.
 (https://www.nomorebounce.com/connectors/api/)
 
 > The above command returns JSON structured like this:
@@ -45,7 +45,8 @@ than you can create an API Connector.
 {
   "status": 200,
   "msg": "A specific message",
-  "email": "The email checked"
+  "email": "The email checked",
+  "smtp_state": "exist",
 }
 ```
 
@@ -73,6 +74,8 @@ Remember — if you force check you will consume a credit per email address.
 
 ## Credits Available
 
+This endpoint gives you the available total credit (free credits and payed credits).
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -81,8 +84,6 @@ Remember — if you force check you will consume a credit per email address.
   "credits": 1500
 }
 ```
-
-This endpoint gives you the available total credit (free credits and payed credits).
 
 ### HTTP Request
 
@@ -99,6 +100,8 @@ token | The token that you can find in the connectors page (required)
 
 ## Listing the imported emails lists
 
+This endpoint returns all the lists imported.
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -110,8 +113,6 @@ token | The token that you can find in the connectors page (required)
             "last_modified": "2018-03-03 10:00:00"}, ...]
 }
 ```
-
-This endpoint returns all the lists imported.
 
 ### HTTP Request
 
@@ -126,6 +127,8 @@ token | The token that you can find in the connectors page (required)
 
 ## Listing the emails in a specific list
 
+This endpoint returns all the emails in a list. The list is paginated, 1000 emails per page.
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -139,8 +142,6 @@ token | The token that you can find in the connectors page (required)
             "created": "2018-03-03 10:00:00"}, ...]
 }
 ```
-
-This endpoint returns all the emails in a list. The list is paginated, 1000 emails per page.
 
 ### HTTP Request
 
@@ -160,6 +161,8 @@ page | 1 | The page of the pagination. 1000 emails per page.
 
 ## Add emails to a list
 
+This endpoint is used to add a list of emails to an imported list.
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -169,8 +172,6 @@ page | 1 | The page of the pagination. 1000 emails per page.
   "imported": 200
 }
 ```
-
-This endpoint is used to add a list of emails to an imported list.
 
 ### HTTP Request
 
@@ -189,6 +190,10 @@ Consider to send not more than 1000 emails per call.
 </aside>
 
 ## List Statistics
+
+This endpoint returns all the statistics about a list. In a "stats" element you can
+find the "result_type" field that can return 1 if it's valid and 2 if it's not
+valid for any reason.
 
 > The above command returns JSON structured like this:
 
@@ -211,10 +216,6 @@ Consider to send not more than 1000 emails per call.
     "list_id": 5
 }
 ```
-
-This endpoint returns all the statistics about a list. In a "stats" element you can
-find the "result_type" field that can return 1 if it's valid and 2 if it's not
-valid for any reason.
 
 ### HTTP Request
 
